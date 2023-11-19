@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "atomichabits",
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -92,12 +93,12 @@ USE_I18N = True
 
 USE_TZ = True
 
-# AUTH_USER_MODEL = "users.User"
-#
-#
-# LOGOUT_REDIRECT_URL = "/"
-# LOGIN_REDIRECT_URL = "/"
-# LOGIN_URL = "/users/"
+AUTH_USER_MODEL = "users.User"
+
+
+LOGOUT_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/"
+LOGIN_URL = "/users/"
 
 
 STATIC_URL = "static/"
