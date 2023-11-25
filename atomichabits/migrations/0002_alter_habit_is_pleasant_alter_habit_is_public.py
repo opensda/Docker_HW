@@ -4,20 +4,26 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('atomichabits', '0001_initial'),
+        ("atomichabits", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='habit',
-            name='is_pleasant',
-            field=models.BooleanField(blank=True, default=False, null=True, verbose_name='признак приятной привычки'),
+            model_name="habit",
+            name="is_pleasant",
+            field=models.BooleanField(
+                blank=True,
+                default=False,
+                null=True,
+                verbose_name="признак приятной привычки",
+            ),
         ),
         migrations.AlterField(
-            model_name='habit',
-            name='is_public',
-            field=models.BooleanField(blank=True, default=False, null=True, verbose_name='публичность'),
+            model_name="habit",
+            name="is_public",
+            field=models.BooleanField(
+                blank=True, default=False, null=True, verbose_name="публичность"
+            ),
         ),
     ]

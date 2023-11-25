@@ -3,9 +3,6 @@ from django.contrib import admin
 from atomichabits.models import Habit
 
 
-# Register your models here.
-
-
 @admin.register(Habit)
 class HabitAdmin(admin.ModelAdmin):
     list_display = (
@@ -19,5 +16,5 @@ class HabitAdmin(admin.ModelAdmin):
         "frequency",
         "award",
         "time_to_complete",
-        "is_public"
+        "is_public",
     )
