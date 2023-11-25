@@ -6,7 +6,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -15,23 +14,83 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Habit',
+            name="Habit",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('place', models.CharField(max_length=150, verbose_name='место')),
-                ('time', models.DateTimeField(blank=True, null=True, verbose_name='время')),
-                ('action', models.CharField(max_length=250, verbose_name='действие')),
-                ('is_pleasant', models.BooleanField(blank=True, null=True, verbose_name='признак приятной привычки')),
-                ('frequency', models.PositiveSmallIntegerField(blank=True, default=1, null=True, verbose_name='периодичность')),
-                ('award', models.CharField(blank=True, max_length=150, null=True, verbose_name='вознаграждение')),
-                ('time_to_complete', models.PositiveIntegerField(blank=True, default=30, null=True, verbose_name='время на выполнение')),
-                ('is_public', models.BooleanField(blank=True, null=True, verbose_name='публичность')),
-                ('related_habit', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='atomichabits.habit', verbose_name='связанная привычка')),
-                ('user', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='пользователь')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("place", models.CharField(max_length=150, verbose_name="место")),
+                (
+                    "time",
+                    models.DateTimeField(blank=True, null=True, verbose_name="время"),
+                ),
+                ("action", models.CharField(max_length=250, verbose_name="действие")),
+                (
+                    "is_pleasant",
+                    models.BooleanField(
+                        blank=True, null=True, verbose_name="признак приятной привычки"
+                    ),
+                ),
+                (
+                    "frequency",
+                    models.PositiveSmallIntegerField(
+                        blank=True, default=1, null=True, verbose_name="периодичность"
+                    ),
+                ),
+                (
+                    "award",
+                    models.CharField(
+                        blank=True,
+                        max_length=150,
+                        null=True,
+                        verbose_name="вознаграждение",
+                    ),
+                ),
+                (
+                    "time_to_complete",
+                    models.PositiveIntegerField(
+                        blank=True,
+                        default=30,
+                        null=True,
+                        verbose_name="время на выполнение",
+                    ),
+                ),
+                (
+                    "is_public",
+                    models.BooleanField(
+                        blank=True, null=True, verbose_name="публичность"
+                    ),
+                ),
+                (
+                    "related_habit",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="atomichabits.habit",
+                        verbose_name="связанная привычка",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="пользователь",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'привычка',
-                'verbose_name_plural': 'привычки',
+                "verbose_name": "привычка",
+                "verbose_name_plural": "привычки",
             },
         ),
     ]

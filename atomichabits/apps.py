@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class AtomichabitsConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'atomichabits'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "atomichabits"

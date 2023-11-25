@@ -4,15 +4,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('users', '0002_user_chat_id'),
+        ("users", "0002_user_chat_id"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='user',
-            name='role',
-            field=models.CharField(choices=[('member', 'member')], default='member', max_length=15, verbose_name='роль'),
+            model_name="user",
+            name="role",
+            field=models.CharField(
+                choices=[("member", "member")],
+                default="member",
+                max_length=15,
+                verbose_name="роль",
+            ),
         ),
     ]
