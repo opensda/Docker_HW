@@ -1,41 +1,60 @@
+# Определение версии Docker Compose и начало описания сервисов
 version: '3'
 
 services:
-
-  redis:
-    image: redis:latest
-    ports:
-      - '6379:6379'
-
-  db:
-    image: postgres
-    environment:
-     - POSTGRES_PASSWORD=mysecretpassword
-     - PGDATA=/var/lib/postgresql/data/pgdata
-
-    volumes:
-      - pg_data:/var/lib/postgresql/data/pgdata
-
-    ports:
-      - '5435:5432'
-
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -d atomichabits_docker -U postgres" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  app:
+  django:
+    # Сборка образа для сервиса django из текущей директории
     build: .
-    tty: true
-    command: python manage.py migrate && python manage.py runserver 0.0.0.0:8000
-    ports:
-      - '8001:8000'
+
+    # Задание имени контейнера для сервиса django
+    container_name: django
+    # Задание команды, которую нужно запустить при запуске контейнера для сервиса django
+    command: >
+      sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
+    # Открытие порта на хостовой машине и перенаправление на порт в контейнере
+    ports:
+      - 8000:8000
+    # Зависимость от другого сервиса
     depends_on:
-      db:
-        condition: service_healthy
+      - pgdb
+
+  pgdb:
+    # Использование готового образа postgres
+    image: postgres
+    # Задание переменных окружения для контейнера с postgres
+    env_file:
+      - .env
+     # Задание имени контейнера для сервиса pgdb
+    container_name: pgdb
+    ports:
+      - 5432:5432
+     # Связывание тома с директорией в контейнере для сохранения данных postgres
+    volumes:
+      - pgdbdata:/var/lib/postgresql/data/
+
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    command: redis-server --appendonly yes
+
+  celery:
+    build: .
+    command: celery -A config worker --loglevel=info
+    depends_on:
+      - redis
+      - django
+
+  celery-beat:
+    build: .
+    command: celery -A config beat -l INFO -S django
+    depends_on:
+      - redis
+      - django
+    
+  
 
 volumes:
-  pg_data:
+  pgdbdata: null

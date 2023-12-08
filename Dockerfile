@@ -1,9 +1,13 @@
-FROM python:3
 
+# Используем официальный образ Python в качестве базового образа
+FROM python
+# Устанавливаем рабочую директорию внутри контейнера
 WORKDIR / code
-
-COPY ./requirements.txt /code/
-
-RUN pip install -r /code/requirements.txt
+# Копируем файл requirements.txt внутрь контейнера
+COPY requirements.txt ./
+# Устанавливаем зависимости, описанные в файле requirements.txt
+RUN pip install -r requirements.txt
 
 COPY . .
+
+EXPOSE 8000
